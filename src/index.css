@@ -1,0 +1,253 @@
+@import "tailwindcss";
+
+:root,
+html[data-mood="sunny"] {
+  --bg: #FFF4DC;
+  --fg: #221A12;
+  --muted: #5B4F40;
+  --dim: #74675A;
+  --panel: #FFFBF1;
+  --panel2: #FFE7B0;
+  --line: #E4D3AC;
+  --a1: #FFC21A;
+  --on-a1: #221A12;
+  --a2: #FF6150;
+  --on-a2: #221A12;
+  --hl: #FFD24D;
+  --atext: #C23B2B;
+  --syn1: #C23B2B;
+  --syn2: #3446C9;
+  --syn3: #0E8559;
+  color-scheme: light;
+}
+
+html[data-mood="coral"] {
+  --bg: #FFEFE6;
+  --fg: #2A1712;
+  --muted: #6A4A41;
+  --dim: #80594F;
+  --panel: #FFF8F3;
+  --panel2: #FFD3C4;
+  --line: #EFCFC2;
+  --a1: #FF6F59;
+  --on-a1: #2A1712;
+  --a2: #27B5A3;
+  --on-a2: #10241F;
+  --hl: #FFB8A6;
+  --atext: #B73220;
+  --syn1: #B73220;
+  --syn2: #1F6F9F;
+  --syn3: #0E7F70;
+  color-scheme: light;
+}
+
+html[data-mood="mono"] {
+  --bg: #FFFFFF;
+  --fg: #0B0B0B;
+  --muted: #444444;
+  --dim: #666666;
+  --panel: #F6F6F6;
+  --panel2: #EAEAEA;
+  --line: #D9D9D9;
+  --a1: #0B0B0B;
+  --on-a1: #FFFFFF;
+  --a2: #D6D6D6;
+  --on-a2: #0B0B0B;
+  --hl: #E0E0E0;
+  --atext: #0B0B0B;
+  --syn1: #0B0B0B;
+  --syn2: #666666;
+  --syn3: #333333;
+  color-scheme: light;
+}
+
+html[data-mood="ink"] {
+  --bg: #0D0D0D;
+  --fg: #F4F1EA;
+  --muted: #C2BDB3;
+  --dim: #9C978D;
+  --panel: #171717;
+  --panel2: #242424;
+  --line: #333333;
+  --a1: #F4F1EA;
+  --on-a1: #0D0D0D;
+  --a2: #4A4A4A;
+  --on-a2: #F4F1EA;
+  --hl: #3B3B3B;
+  --atext: #F4F1EA;
+  --syn1: #F4F1EA;
+  --syn2: #9C978D;
+  --syn3: #D8D3C8;
+  color-scheme: dark;
+}
+
+/* Constants across all moods */
+:root {
+  --net: #8B8F99;
+  --auth: #FF8A00;
+  --cache: #16A878;
+  --db: #E5484D;
+  --queue: #6C5CE7;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography Utility Classes */
+.font-display {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-variation-settings: 'wdth' 90;
+}
+
+.font-mono-code {
+  font-family: 'Spline Sans Mono', monospace;
+}
+
+/* Marker Stripe Highlight */
+.marker-hl {
+  background: linear-gradient(transparent 58%, var(--hl) 58% 93%, transparent 93%);
+  display: inline;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+/* Hard Shadows */
+.shadow-hard-nav {
+  box-shadow: 4px 4px 0 var(--fg);
+}
+
+.shadow-hard-card {
+  box-shadow: 6px 6px 0 var(--fg);
+}
+
+.shadow-hard-large {
+  box-shadow: 8px 8px 0 var(--fg);
+}
+
+.shadow-hard-sm {
+  box-shadow: 2px 2px 0 var(--fg);
+}
+
+.shadow-hard-btn {
+  box-shadow: 3px 3px 0 var(--fg);
+}
+
+/* Hover lift transition */
+.btn-lift {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-lift:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--fg);
+}
+.btn-lift:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--fg);
+}
+
+/* Focus outline */
+*:focus-visible {
+  outline: 3px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* Blob morph animation */
+@keyframes blobMorph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  33% {
+    border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%;
+  }
+  66% {
+    border-radius: 65% 35% 45% 55% / 40% 70% 50% 60%;
+  }
+}
+
+.animate-blob-morph {
+  animation: blobMorph 8s ease-in-out infinite;
+}
+
+/* Pulse dash animation along SVG heartbeat */
+@keyframes dashRun {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.animate-pulse-dash {
+  stroke-dasharray: 40 960;
+  animation: dashRun 4s linear infinite;
+}
+
+/* Sticker bobbing */
+@keyframes bobSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(var(--rot, 0deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--rot, 0deg));
+  }
+}
+
+.animate-bob {
+  animation: bobSlow 3.5s ease-in-out infinite;
+}
+
+/* Spinning star */
+@keyframes slowSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slow-spin {
+  animation: slowSpin 14s linear infinite;
+}
+
+/* Caret blinking */
+@keyframes blinkCaret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-caret {
+  animation: blinkCaret 0.8s step-end infinite;
+}
+
+/* Swatch dot hard split */
+.swatch-sunny {
+  background: linear-gradient(90deg, #FFC21A 50%, #FFF4DC 50%);
+}
+.swatch-coral {
+  background: linear-gradient(90deg, #FF6F59 50%, #FFEFE6 50%);
+}
+.swatch-mono {
+  background: linear-gradient(90deg, #0B0B0B 50%, #FFFFFF 50%);
+}
+.swatch-ink {
+  background: linear-gradient(90deg, #F4F1EA 50%, #0D0D0D 50%);
+}
+
+/* Active swatch ring */
+.swatch-active {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--fg);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
